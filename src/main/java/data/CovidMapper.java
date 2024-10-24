@@ -1,10 +1,13 @@
 package data;
 
 import java.nio.file.Paths;
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.FileReader;
 
 import domain.DataItem;
 
@@ -17,15 +20,16 @@ public class CovidMapper {
 	
 	public ArrayList<DataItem> loadCSVFile() {
 		ArrayList<DataItem> temp = new ArrayList<>();
-		try (Scanner fileReader = new Scanner(Paths.get(filePath))){
+		try (CSVReader fileReader = new CSVReader(new FileReader(filePath))){
 			
-			fileReader.nextLine();
+			fileReader.readNext();
 			
-			String line;
+			String[] lineArray;
 			
-			while(fileReader.hasNextLine()) {
-				line = fileReader.nextLine();
-				String[] lineArray = line.split(",");
+			while((lineArray = fileReader.readNext()) != null) {
+				if(lineArray.length < 10) {
+					throw new IllegalArgumentException("Line does not have enough fields");
+				}
 				
 				DataItem dataItem = new DataItem();
 				dataItem.setDirection(lineArray[0]);
@@ -46,7 +50,7 @@ public class CovidMapper {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e.getMessage());
+			System.out.println("error: " + e.getMessage());
 		}
 		
 		return temp;
