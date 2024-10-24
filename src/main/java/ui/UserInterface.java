@@ -49,7 +49,11 @@ public class UserInterface {
 		List<String> temp = new ArrayList<String>();
 		temp = askForParameters(temp);
 		
-		System.out.println(dc.getYearlyTotal(temp.get(0), temp.get(1), temp.get(2), temp.get(3), year));
+		for(int month = 1; month <= 12; month++) {
+			System.out.printf("Total of %s/%s: %d%n", month, year, dc.getMonthlyTotal(temp.get(0), temp.get(1), temp.get(2), temp.get(3), month, year));
+		}
+		
+		System.out.printf("Total of complete year %d: %d%n", year, dc.getYearlyTotal(temp.get(0), temp.get(1), temp.get(2), temp.get(3), year));
 	}
 	
 	public void executeYearlyAverage() {
@@ -58,7 +62,11 @@ public class UserInterface {
 		List<String> temp = new ArrayList<String>();
 		temp = askForParameters(temp);
 		
-		System.out.println(dc.getYearlyAverage(temp.get(0), temp.get(1), temp.get(2), temp.get(3), year));
+		for(int month = 1; month <= 12; month++) {
+			System.out.printf("Total of %s/%s: %d%n", month, year, dc.getMonthlyAverage(temp.get(0), temp.get(1), temp.get(2), temp.get(3), month, year));
+		}
+		
+		System.out.printf("Total of complete year %d: %d%n", year, dc.getYearlyAverage(temp.get(0), temp.get(1), temp.get(2), temp.get(3), year));
 	}
 
 	public void executeMonthlyTotal() {
@@ -67,7 +75,7 @@ public class UserInterface {
 		List<String> temp = new ArrayList<String>();
 		temp = askForParameters(temp);
 		
-		System.out.println(dc.getMonthlyTotal(temp.get(0), temp.get(1), temp.get(2), temp.get(3), monthAndYear.get(0), monthAndYear.get(1)));
+		System.out.printf("Total of %s/%s: %d%n", monthAndYear.get(0), monthAndYear.get(1), dc.getMonthlyTotal(temp.get(0), temp.get(1), temp.get(2), temp.get(3), monthAndYear.get(0), monthAndYear.get(1)));
 	}
 
 	public void executeMonthlyAverage() {
@@ -76,7 +84,7 @@ public class UserInterface {
 		List<String> temp = new ArrayList<String>();
 		temp = askForParameters(temp);
 		
-		System.out.println(dc.getMonthlyAverage(temp.get(0), temp.get(1), temp.get(2), temp.get(3), monthAndYear.get(0), monthAndYear.get(1)));
+		System.out.printf("Total of %s/%s: %d%n", monthAndYear.get(0), monthAndYear.get(1), dc.getMonthlyAverage(temp.get(0), temp.get(1), temp.get(2), temp.get(3), monthAndYear.get(0), monthAndYear.get(1)));
 	}
 	
 	public List<String> askForParameters(List<String> temp){

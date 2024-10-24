@@ -111,16 +111,10 @@ public class ConvertingData {
 	}
 	
 	public List<DataItem> filterListByMonth(List<DataItem> list, int month, int year){
-		List<DataItem> filteredList = new ArrayList<>();
-		
-		list.stream().filter(dataItem -> dataItem.getYear() == year && dataItem.getDate().getMonthValue() == month).toList();
-		
-		return list;
+		return list.stream().filter(dataItem -> dataItem.getYear() == year && dataItem.getDate().getMonthValue() == month).toList();
 	}
 	
 	public List<DataItem> filterListByYear(List<DataItem> list, int year){
-		list.stream().filter(dataItem -> dataItem.getYear() == year).toList();
-		
-		return list;
+		return list.stream().filter(dataItem -> dataItem.getYear() == year).toList();
 	}
 }
