@@ -32,6 +32,7 @@ public class UserInterface {
 			case "yearly_average" -> executeYearlyAverage();
 			case "monthly_total" -> executeMonthlyTotal();
 			case "monthly_average" -> executeMonthlyAverage();
+			case "overview" -> dc.giveOverview();
 			}
 		}
 	}
@@ -118,4 +119,5 @@ public class UserInterface {
 		
 		return list;
 	}
+	
 }

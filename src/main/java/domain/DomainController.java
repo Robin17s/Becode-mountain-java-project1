@@ -5,11 +5,13 @@ public class DomainController {
 	private DataRepository repository;
 	private Help help;
 	private ConvertingData convertingData;
+	private Overview overview;
 	
 	public DomainController() {
 		repository = new DataRepository();
 		help = new Help();
 		convertingData = new ConvertingData();
+		overview = new Overview();
 	}
 	
 	public String getHelp(String command) {
@@ -30,5 +32,9 @@ public class DomainController {
 	
 	public double getYearlyAverage(String country, String commodity, String transportMode, String measure, int year) {
 		return convertingData.getYearlyAverage(repository, country, commodity, transportMode, measure, year);
+	}
+	
+	public void giveOverview() {
+		overview.giveOverview(repository);
 	}
 }
