@@ -17,7 +17,10 @@ public class ConvertingData {
 		transportMode = transportMode.toLowerCase();
 		measure = measure.toLowerCase();
 		
-		List<DataItem> filteredList = filterListByParameters(list, country, commodity, transportMode, measure);
+		List<DataItem> filteredList = filterListByCountry(list, country);
+		filteredList = filterListByCommodity(filteredList, commodity);
+		filteredList = filterListByTransportation(filteredList, transportMode);
+		filteredList = filterListByMeasure(filteredList, measure);
 		filteredList = filterListByMonth(filteredList, month, year);
 		
 		return filteredList;
@@ -30,7 +33,10 @@ public class ConvertingData {
 		transportMode = transportMode.toLowerCase();
 		measure = measure.toLowerCase();
 		
-		List<DataItem> filteredList = filterListByParameters(list, country, commodity, transportMode, measure);
+		List<DataItem> filteredList = filterListByCountry(list, country);
+		filteredList = filterListByCommodity(filteredList, commodity);
+		filteredList = filterListByTransportation(filteredList, transportMode);
+		filteredList = filterListByMeasure(filteredList, measure);
 		filteredList = filterListByYear(filteredList, year);
 		
 		return filteredList;
@@ -80,7 +86,7 @@ public class ConvertingData {
 		return (double) total / filteredList.size();
 	}
 	
-	public List<DataItem> filterListByParameters(List<DataItem> list, String country, String commodity, String transportMode, String measure){		
+	public List<DataItem> filterListByCountry(List<DataItem> list, String country){		
 		List<DataItem> filteredList = new ArrayList<>();
 		
 		if(!(country.isBlank() || country.isEmpty())) {
@@ -89,22 +95,40 @@ public class ConvertingData {
 			filteredList = list.stream().filter(dataItem -> dataItem.getCountry().equals("all")).toList();
 		}
 		
+		return filteredList;
+	}
+	
+	public List<DataItem> filterListByCommodity(List<DataItem> list, String commodity){
+		List<DataItem> filteredList = new ArrayList<>();
+		
 		if(!(commodity.isBlank() || commodity.isEmpty())) {
-			filteredList = filteredList.stream().filter(dataItem -> dataItem.getCommodity().equals(commodity)).toList();
+			filteredList = list.stream().filter(dataItem -> dataItem.getCommodity().equals(commodity)).toList();
 		} else {
-			filteredList = filteredList.stream().filter(dataItem -> dataItem.getCommodity().equals("all")).toList();
+			filteredList = list.stream().filter(dataItem -> dataItem.getCommodity().equals("all")).toList();
 		}
+		
+		return filteredList;
+	}
+	
+	public List<DataItem> filterListByTransportation(List<DataItem> list, String transportMode){
+		List<DataItem> filteredList = new ArrayList<>();
 		
 		if(!(transportMode.isBlank() || transportMode.isEmpty())) {
-			filteredList = filteredList.stream().filter(dataItem -> dataItem.getTransportMode().equals(transportMode)).toList();
+			filteredList = list.stream().filter(dataItem -> dataItem.getTransportMode().equals(transportMode)).toList();
 		} else {
-			filteredList = filteredList.stream().filter(dataItem -> dataItem.getTransportMode().equals("all")).toList();			
+			filteredList = list.stream().filter(dataItem -> dataItem.getTransportMode().equals("all")).toList();			
 		}
 		
+		return filteredList;
+	}
+
+	public List<DataItem> filterListByMeasure(List<DataItem> list, String measure){
+		List<DataItem> filteredList = new ArrayList<>();
+		
 		if(!(measure.isBlank() || measure.isEmpty())) {
-			filteredList = filteredList.stream().filter(dataItem -> dataItem.getMeasure().equals(measure)).toList();
+			filteredList = list.stream().filter(dataItem -> dataItem.getMeasure().equals(measure)).toList();
 		} else {
-			filteredList = filteredList.stream().filter(dataItem -> dataItem.getMeasure().equals("$")).toList();			
+			filteredList = list.stream().filter(dataItem -> dataItem.getMeasure().equals("$")).toList();			
 		}
 		
 		return filteredList;

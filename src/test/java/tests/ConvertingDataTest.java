@@ -38,9 +38,9 @@ public class ConvertingDataTest {
 		item2.setYear(2015);
 		item2.setDate(LocalDate.of(2015, 1, 15));
 		item2.setWeekday("Thursday");
-		item2.setCountry("China");
-		item2.setCommodity("Meat and edible offal");
-		item2.setTransportMode("Sea");
+		item2.setCountry("All");
+		item2.setCommodity("All");
+		item2.setTransportMode("All");
 		item2.setMeasure("$");
 		item2.setValue(95000000);
 		item2.setCumulative(104000000);
@@ -92,6 +92,66 @@ public class ConvertingDataTest {
 	@Test
 	public void filterListByMonth_0ItemsAreSufficient() {
 		assertEquals(0, cd.filterListByMonth(list, 1, 2010).size());
+	}
+	
+	@Test
+	public void filterListByCountry_2ItemsAreSufficient() {
+		assertEquals(2, cd.filterListByCountry(list, "all").size());
+	}
+	
+	@Test
+	public void filterListByCountry_1ItemsAreSufficient() {
+		assertEquals(1, cd.filterListByCountry(list, "united states").size());
+	}
+	
+	@Test
+	public void filterListByCountry_0ItemsAreSufficient() {
+		assertEquals(0, cd.filterListByCountry(list, "china").size());
+	}
+	
+	@Test
+	public void filterListByCommodoty_2ItemsAreSufficient() {
+		assertEquals(2, cd.filterListByCommodity(list, "all").size());
+	}
+	
+	@Test
+	public void filterListByCommodoty_1ItemsAreSufficient() {
+		assertEquals(1, cd.filterListByCommodity(list, "mechanical machinery and equip").size());
+	}
+	
+	@Test
+	public void filterListByCommodoty_0ItemsAreSufficient() {
+		assertEquals(0, cd.filterListByCommodity(list, "food").size());
+	}
+	
+	@Test
+	public void filterListByTransportation_2ItemsAreSufficient() {
+		assertEquals(2, cd.filterListByTransportation(list, "all").size());
+	}
+	
+	@Test
+	public void filterListByTransportation_1ItemsAreSufficient() {
+		assertEquals(1, cd.filterListByTransportation(list, "air").size());
+	}
+	
+	@Test
+	public void filterListByTransportation_0ItemsAreSufficient() {
+		assertEquals(0, cd.filterListByTransportation(list, "sea").size());
+	}
+	
+	@Test
+	public void filterListByMeasure_2ItemsAreSufficient() {
+		assertEquals(2, cd.filterListByMeasure(list, "$").size());
+	}
+	
+	@Test
+	public void filterListByMeasure_1ItemsAreSufficient() {
+		assertEquals(1, cd.filterListByMeasure(list, "tonnes").size());
+	}
+	
+	@Test
+	public void filterListByMeasure_0ItemsAreSufficient() {
+		assertEquals(0, cd.filterListByMeasure(list, "kilo").size());
 	}
 
 }
